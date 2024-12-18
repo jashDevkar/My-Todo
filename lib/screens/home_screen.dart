@@ -38,13 +38,14 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               Column(
                 children: [
+                  ///Todo implement filter of tasks
                   ListTile(
                     leading: const Text('All Tasks'),
                     trailing: Radio(
                         value: 'All',
                         groupValue: _filterValue,
                         onChanged: (value){
-                          Provider.of<TodoData>(context,listen: false).getAllTasks();
+                          // Provider.of<TodoData>(context,listen: false).getAllTasks();
                           setState(() {
                             _filterValue = value!;
                           });
@@ -56,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         value:'Completed',
                         groupValue: _filterValue,
                         onChanged: (value){
-                          Provider.of<TodoData>(context,listen: false).getCompletedTask();
+                          // Provider.of<TodoData>(context,listen: false).getCompletedTask();
                           setState(() {
                             _filterValue = value!;
                           });
@@ -69,7 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         groupValue: _filterValue,
                         onChanged: (value){
                           setState(() {
-                            Provider.of<TodoData>(context,listen: false).getHighPriorityTask();
+                            // Provider.of<TodoData>(context,listen: false).getHighPriorityTask();
                             _filterValue = value!;
                           });
                         }),
