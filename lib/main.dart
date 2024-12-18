@@ -15,10 +15,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ///wrapping whole app in provider state management
     return ChangeNotifierProvider(
       create: (context)=>TodoData(),
       child: const MaterialApp(
         debugShowCheckedModeBanner:false,
+        ///spliting app into 2 sections
+        ///namely task header and task list
+        ///task header containes information of total tasks
+        ///task list will build tasks list
+        ///This 2 sections are stored in home screen
         home: HomeScreen(),
         ),
     );

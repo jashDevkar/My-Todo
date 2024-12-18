@@ -4,6 +4,8 @@ import 'package:my_todo/database/todo_database.dart';
 import 'package:provider/provider.dart';
 
 
+///add task screen will collect all the information and on submit button it will call
+///add task function of todo_dataBase class
 
 TextEditingController _dateController = TextEditingController();
 class AddTaskScreen extends StatefulWidget {
@@ -24,6 +26,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
   void dispose() {
     _titleController.dispose();
     _descriptionController.dispose();
+    _dateController.dispose();
     super.dispose();
   }
 
@@ -131,6 +134,10 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                   ///submit button
                   TextButton(
                     onPressed: () {
+                      ///check if all fields are present or not
+                      ///if not snow snack bar
+                      ///else call addTask function and pop the navigator
+
                       if(_descriptionController.text.isNotEmpty && _titleController.text.isNotEmpty && _dateController.text.isNotEmpty){
                         Provider.of<TodoData>(context,listen: false).addData(
                             title: _titleController.text,
@@ -162,6 +169,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                   ),
                   /// clear section button
                   TextButton(
+                    ///this will clear all fields of text field
                     onPressed: () {
                       _titleController.clear();
                       _descriptionController.clear();

@@ -15,6 +15,7 @@ class TaskHeader extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text('My Todo',style: kHeaderTextStyle,),
+          ///calling provider to count todoList length
           Text('${context.watch<TodoData>().todoList.length} Tasks',style: kTaskCountStyle,)
         ],
       ),

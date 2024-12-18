@@ -44,29 +44,32 @@ class TaskTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Slidable(
-      ///edit
+      ///edit slide
       startActionPane: ActionPane(
-        motion: StretchMotion(),
+        motion: const StretchMotion(),
         children: [
+          ///edit call back
           SlidableAction(onPressed: editCallBack,
             icon: Icons.edit,
             backgroundColor: Colors.blue,
           )
         ],
       ),
-      ///delete
+      ///delete slide
       endActionPane: ActionPane(
-          motion: StretchMotion(),
+          motion: const StretchMotion(),
           children:[
+            ///delete call back
             SlidableAction(onPressed: deleteCallBack,
             icon: Icons.delete,
             backgroundColor: Colors.red,)
           ] ),
       child: Card(
           color: Colors.white,
-          elevation: 4.0,
+          elevation: 5.0,
+          margin: const EdgeInsets.only(bottom: 10.0),
           child: Padding(
-            padding: const EdgeInsets.only(right: 8.0, left: 10.0, top: 10.0, bottom: 10.0),
+            padding: const EdgeInsets.all(10.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -133,6 +136,9 @@ class TaskTile extends StatelessWidget {
                       value: isCheck,
                       activeColor: Colors.blue,
                       onChanged: (value) {
+                        ///checkbox call back function
+                        ///this fnction will call another function in todo_database
+                        ///and that function will toggle todo with help of this list todo instance
                         changeCheckState();
                       },
                     ),

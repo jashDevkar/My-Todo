@@ -6,6 +6,9 @@ import 'package:my_todo/database/todo_database.dart';
 import 'package:my_todo/screens/add_task_screen.dart';
 import 'package:provider/provider.dart';
 
+
+
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -15,7 +18,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
 
-  String _filterValue = 'All';
+  Filter _filterValue = Filter.all;
 
   @override
   void initState(){
@@ -28,6 +31,8 @@ class _HomeScreenState extends State<HomeScreen> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.blue,
+        ///drawer contains Radio to filter task
+        ///This filteration happens with enum stored in todo_database file
         drawer: Drawer(
           backgroundColor: Colors.white,
           child:ListView(
@@ -38,52 +43,56 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     Text('F i l t e r',style: kFiltertitleStyle,),
                     SizedBox(width: 8.0,),
-                    Icon(Icons.filter_alt),
+                    Icon(Icons.filter_alt,color: Colors.blue,),
                   ],
                 ),
               ),
               Column(
                 children: [
-                  ///Todo implement filter of tasks
+                  ///filter of all tasks
+                  ///call setFilter method to change the currentFilter value  in todo_database file
                   ListTile(
                     leading: const Text('All Tasks'),
                     trailing: Radio(
                         activeColor: Colors.blue,
-                        value: 'All',
+                        value: Filter.all,
                         groupValue: _filterValue,
                         onChanged: (value){
-                          // Provider.of<TodoData>(context,listen: false).getAllTasks();
+                          ///setting currentFilter value to filter.all
+                          Provider.of<TodoData>(context,listen: false).setFilter(value!);
                           setState(() {
-                            _filterValue = value!;
+                            _filterValue = value;
                           });
                         }),
-                  ),
+                  ),///all
                   ListTile(
                     leading: const Text('Completed Tasks'),
                     trailing: Radio(
                         activeColor: Colors.blue,
-                        value:'Completed',
+                        value:Filter.completed,
                         groupValue: _filterValue,
                         onChanged: (value){
-                          // Provider.of<TodoData>(context,listen: false).getCompletedTask();
+                          ///setting currentFilter value to filter.completed
+                          Provider.of<TodoData>(context,listen: false).setFilter(value!);
                           setState(() {
-                            _filterValue = value!;
+                            _filterValue = value;
                           });
                         }),
-                  ),
+                  ),///completed
                   ListTile(
                     leading: const Text('High Priority Tasks'),
                     trailing: Radio(
                         activeColor: Colors.blue,
-                        value: 'High',
+                        value: Filter.highPriority,
                         groupValue: _filterValue,
                         onChanged: (value){
+                          ///setting currentFilter value to filter.priority
+                            Provider.of<TodoData>(context,listen: false).setFilter(value!);
                           setState(() {
-                            // Provider.of<TodoData>(context,listen: false).getHighPriorityTask();
-                            _filterValue = value!;
+                            _filterValue = value;
                           });
                         }),
-                  ),
+                  ),///high
 
                 ],
               )
@@ -107,7 +116,10 @@ class _HomeScreenState extends State<HomeScreen> {
         body: const Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            ///task header will have information such as total number of task
             TaskHeader(),
+            ///task list will build all task having information
+            ///title,descripition,priority and due date
             TaskLists(),
           ],
         ),

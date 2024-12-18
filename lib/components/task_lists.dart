@@ -13,10 +13,14 @@ class TaskLists extends StatefulWidget {
 
 class _TaskListsState extends State<TaskLists> {
 
+  ///Initializing consumer of TodoData class
   @override
   Widget build(BuildContext context) {
     return Consumer<TodoData>(
       builder: (context, todoData, child) {
+        ///this will return a default value that is todoList if filter is all
+        ///remember we are not changing original todoList
+        final todos = todoData.filteredTask;
         return Expanded(
           child: Container(
             padding: const EdgeInsets.only(left: 10.0, right: 10.0, top: 20.0),
@@ -28,9 +32,10 @@ class _TaskListsState extends State<TaskLists> {
               color: Colors.white,
             ),
             child: ListView.builder(
-              itemCount: todoData.todoList.length,
+              itemCount:todos.length,
               itemBuilder: (context, index) {
-                final todo = todoData.todoList[index];
+                final todo = todos[index];
+                ///building tile for each todo
                 return TaskTile(
                   title: todo.title,
                   description: todo.description,

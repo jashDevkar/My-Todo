@@ -17,17 +17,18 @@ class EditTask extends StatefulWidget {
 }
 
 class _EditTaskState extends State<EditTask> {
-  TextEditingController _titleController = TextEditingController();
-  TextEditingController _descriptionController = TextEditingController();
+  final TextEditingController _titleController = TextEditingController();
+  final TextEditingController _descriptionController = TextEditingController();
 
   bool editTaskState = true;
   late int _priority;
-  late final  todo;
+  late final TodoModel todo;
 
   @override
   void dispose() {
     _titleController.dispose();
     _descriptionController.dispose();
+    _dateController.dispose();
     super.dispose();
   }
 
@@ -35,6 +36,9 @@ class _EditTaskState extends State<EditTask> {
   Widget build(BuildContext context) {
 
     if(editTaskState){
+      ///enable edit task state so that all controllers value is fixed
+      ///once assigned disbale edit task state
+      ///this will help to not to change to default value when state of the app is changed
       todo = widget.todo;
       _titleController.text = todo.title;
       _priority= todo.priority ;
@@ -144,6 +148,9 @@ class _EditTaskState extends State<EditTask> {
                   ///submit button
                   TextButton(
                     onPressed: () {
+                      ///check if all fields are filled.
+                      ///as instance is passed no need to call another function
+                      ///directly change value of instance and call a notifier to alert ui changes
                       if(_descriptionController.text.isNotEmpty && _titleController.text.isNotEmpty && _dateController.text.isNotEmpty){
                         widget.todo.title  = _titleController.text;
                         widget.todo.description = _descriptionController.text;
