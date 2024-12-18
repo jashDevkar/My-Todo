@@ -2,24 +2,25 @@ import 'package:flutter/cupertino.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:my_todo/models/todo_model.dart';
 class TodoData extends ChangeNotifier{
-  List<TodoModel> todoList =[
-  ];
+  List<TodoModel> todoList =[];
   final Box _box = Hive.box('myBox');
   List jsonList =[];
 
   void storeData(){
-    jsonList =[];
+    jsonList.clear();
     for (var item in todoList) {
       jsonList.add(item.toJson(item));
     }
     _box.put('TODOS', jsonList);
   }
 
-  void getAllTaskFromLocalStorage()async{
-   jsonList= await _box.get('TODOS');
+  void getAllTaskFromLocalStorage(){
+   jsonList=  _box.get('TODOS') ?? [];
    if(jsonList.isNotEmpty){
-     var myList = jsonList.map((item)=>TodoModel.fromJson(item)).toList();
-     todoList=[...myList];
+     List<TodoModel> myList = jsonList.map((item)=>TodoModel.fromJson(item)).toList();
+     for(TodoModel todoModel in myList){
+       todoList.add(todoModel);
+     }
    }
    else{
      addDummyData();
