@@ -18,6 +18,12 @@ class _HomeScreenState extends State<HomeScreen> {
   String _filterValue = 'All';
 
   @override
+  void initState(){
+    super.initState();
+    Provider.of<TodoData>(context,listen: false).getAllTaskFromLocalStorage();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
@@ -42,6 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ListTile(
                     leading: const Text('All Tasks'),
                     trailing: Radio(
+                        activeColor: Colors.blue,
                         value: 'All',
                         groupValue: _filterValue,
                         onChanged: (value){
@@ -54,6 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ListTile(
                     leading: const Text('Completed Tasks'),
                     trailing: Radio(
+                        activeColor: Colors.blue,
                         value:'Completed',
                         groupValue: _filterValue,
                         onChanged: (value){
@@ -66,6 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ListTile(
                     leading: const Text('High Priority Tasks'),
                     trailing: Radio(
+                        activeColor: Colors.blue,
                         value: 'High',
                         groupValue: _filterValue,
                         onChanged: (value){

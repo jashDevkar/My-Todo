@@ -13,13 +13,6 @@ class TaskLists extends StatefulWidget {
 
 class _TaskListsState extends State<TaskLists> {
 
-
-  @override
-  void initState(){
-    super.initState();
-    Provider.of<TodoData>(context,listen: false).getAllTaskFromLocalStorage();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Consumer<TodoData>(
@@ -47,10 +40,10 @@ class _TaskListsState extends State<TaskLists> {
                   changeCheckState: () {
                     todoData.changeCheckState(todo);
                   },
-                  deleteCallBack: (BuildContext) {
+                  deleteCallBack: (BuildContext context) {
                     todoData.deleteTodo(todo);
                   },
-                  editCallBack: (BuildContext) {
+                  editCallBack: (BuildContext context) {
                     Navigator.push(
                       context,
                       MaterialPageRoute(

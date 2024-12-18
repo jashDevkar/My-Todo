@@ -9,8 +9,8 @@ class TaskTile extends StatelessWidget {
   bool isCheck;
   int priority;
   Function changeCheckState;
-  Function(BuildContext) deleteCallBack;
-  Function(BuildContext) editCallBack;
+  Function(BuildContext context) deleteCallBack;
+  Function(BuildContext context) editCallBack;
 
   TaskTile(
       {super.key, required this.title,
@@ -22,26 +22,29 @@ class TaskTile extends StatelessWidget {
       required this.deleteCallBack,
       required this.editCallBack});
 
+
+  ///String date {upcoming ,passed,today}
   String getDueDateText() {
     DateTime taskDueDate = DateTime.parse(dueDate);
-    taskDueDate =
-        DateTime(taskDueDate.year, taskDueDate.month, taskDueDate.day);
+    taskDueDate = DateTime(taskDueDate.year, taskDueDate.month, taskDueDate.day);
     DateTime currentDate =
         DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
 
     if (taskDueDate.isAtSameMomentAs(currentDate)) {
-      return 'Today $dueDate';
+        return 'Today $dueDate';
     } else if (taskDueDate.isAfter(currentDate)) {
-      return 'Upcomming $dueDate';
-    } else
-      return 'Passed $dueDate';
-  }
+        return 'Upcomming $dueDate';
+    } else{
+        return 'Passed $dueDate';
+    }
 
+  }
 
 
   @override
   Widget build(BuildContext context) {
     return Slidable(
+      ///edit
       startActionPane: ActionPane(
         motion: StretchMotion(),
         children: [
@@ -51,6 +54,7 @@ class TaskTile extends StatelessWidget {
           )
         ],
       ),
+      ///delete
       endActionPane: ActionPane(
           motion: StretchMotion(),
           children:[
