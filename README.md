@@ -17,6 +17,8 @@ samples, guidance on mobile development, and a full API reference.
 
 ## Get started with app
 
+## home Screen
+
 <div style="display: flex; flex-direction: row;">
   <img src="./images/homeScreen.jpg" alt="Image Description" width="150" style="margin-right: 20px;">
   <p><b>Home Screen</b> is the Starting point of our app 
@@ -24,7 +26,14 @@ samples, guidance on mobile development, and a full API reference.
   click on the floating button to add task 
   <br>
   initially if there are no task in the screen , the app will add 2 dummy task to show difference between high priority and low priority task
-    
   </p>
 </div>
 
+
+## Add Task Screen
+
+
+<img src="./images/addTaskScreen.jpg" alt="Image Description" width="150" style="margin-right: 20px;">
+<p><b>Add task screen</b> is where you add task</p>
+<p>you have to add all fields such as title, description, priority and due date </p>
+<p>if one  of the field is empty than it will show a snack bar or message showing all fields are required</p>
