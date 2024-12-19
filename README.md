@@ -17,4 +17,4 @@ samples, guidance on mobile development, and a full API reference.
 
 ## Get started with app
 
-![Alt text](images/homeScreen.jpg)
+<img src="./images/homeScreen.jpg" alt="App Screenshot" width="300">
