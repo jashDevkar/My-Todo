@@ -17,7 +17,7 @@ samples, guidance on mobile development, and a full API reference.
 
 ## Get started with app
 
-<div style="display: flex; align-items: center;">
+<div style="display: flex; align-items: center; flex-direction:row;">
   <img src="./images/homeScreen.jpg" alt="Image Description" width="150" style="margin-right: 20px;">
   <p><b>Home Screen</b> is the Starting point of our app 
   <br>
