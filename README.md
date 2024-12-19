@@ -1,4 +1,4 @@
-# my_todo
+# Todo
 
 A new Flutter project.
 
@@ -15,19 +15,17 @@ For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 
-## Get started with app
 
 ## home Screen
 
-<div style="display: flex; flex-direction: row;">
-  <img src="./images/homeScreen.jpg" alt="Image Description" width="150" style="margin-right: 20px;">
-  <p><b>Home Screen</b> is the Starting point of our app 
-  <br>
-  click on the floating button to add task 
-  <br>
-  initially if there are no task in the screen , the app will add 2 dummy task to show difference between high priority and low priority task
-  </p>
-</div>
+
+<img src="./images/homeScreen.jpg" alt="Image Description" width="150" style="margin-right: 20px;">
+<p><b>Home Screen</b> is the Starting point of our app  </p>
+<p>click on the floating button to add task </p>
+<p>initially if there are no task in the screen , the app will add 2 dummy task to show difference between high priority and low priority task</p>
+  
+ 
+
 
 
 ## Add Task Screen
@@ -55,3 +53,14 @@ samples, guidance on mobile development, and a full API reference.
 <p>if you want to edit a task swipe right on the task </p>
 <p>A edit button would be visible click on it, you will be redirected to edit task screen similar to add task screen</p>
 <p>if you are dont editing simply click on edit task button and your task will be edited</p>
+
+
+
+## Filter Task Screen
+
+
+<img src="./images/filterTaskScreen.jpg" alt="Image Description" width="150" style="margin-right: 20px;">
+<p><b>Filter task Drawer</b> is where you filter all tasks</p>
+<p>if you want to filter a task click on the menu button on top left of homescreen  </p>
+<p>A drawer will be visible to you , initially the filter will be set on all task</p>
+<p>you can filter a task based on high priority and if task is completed</p>
