@@ -17,4 +17,14 @@ samples, guidance on mobile development, and a full API reference.
 
 ## Get started with app
 
-<img src="./images/homeScreen.jpg" alt="App Screenshot" width="300">
+<div style="display: flex; align-items: center;">
+  <img src="./images/homeScreen..jpg" alt="Image Description" width="150" style="margin-right: 20px;">
+  <p><b>Home Screen</b> is the Starting point of our app 
+  <br>
+  click on the floating button to add task 
+  <br>
+  initially if there are no task in the screen , the app will add 2 dummy task to show difference between high priority and low priority task
+    
+  </p>
+</div>
+
