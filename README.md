@@ -18,7 +18,7 @@ samples, guidance on mobile development, and a full API reference.
 ## Get started with app
 
 <div style="display: flex; align-items: center;">
-  <img src="./images/homeScreen..jpg" alt="Image Description" width="150" style="margin-right: 20px;">
+  <img src="./images/homeScreen.jpg" alt="Image Description" width="150" style="margin-right: 20px;">
   <p><b>Home Screen</b> is the Starting point of our app 
   <br>
   click on the floating button to add task 
