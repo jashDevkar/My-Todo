@@ -43,32 +43,30 @@ class TaskTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Slidable(
-      ///edit slide
-      startActionPane: ActionPane(
-        motion: const StretchMotion(),
-        children: [
-          ///edit call back
-          SlidableAction(onPressed: editCallBack,
-            icon: Icons.edit,
-            backgroundColor: Colors.blue,
-          )
-        ],
-      ),
-      ///delete slide
-      endActionPane: ActionPane(
+    return Card(
+      color: Colors.white,
+      elevation: 5.0,
+      margin: const EdgeInsets.only(bottom: 12.0),
+      child: Slidable(
+        startActionPane: ActionPane(
           motion: const StretchMotion(),
-          children:[
-            ///delete call back
-            SlidableAction(onPressed: deleteCallBack,
-            icon: Icons.delete,
-            backgroundColor: Colors.red,)
-          ] ),
-      child: Card(
-          color: Colors.white,
-          elevation: 5.0,
-          margin: const EdgeInsets.only(bottom: 10.0),
-          child: Padding(
+          children: [
+            ///edit call back
+            SlidableAction(onPressed: editCallBack,
+              icon: Icons.edit,
+              backgroundColor: Colors.blue,
+            )
+          ],
+        ),
+        endActionPane: ActionPane(
+            motion: const StretchMotion(),
+            children:[
+              ///delete call back
+              SlidableAction(onPressed: deleteCallBack,
+              icon: Icons.delete,
+              backgroundColor: Colors.red,)
+            ] ),
+        child: Padding(
             padding: const EdgeInsets.all(10.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -101,7 +99,7 @@ class TaskTile extends StatelessWidget {
                                 : TextDecoration.none),
                       ),
                       const SizedBox(
-                        height: 2.0,
+                        height: 4.0,
                       ),
 
                       ///date
@@ -146,7 +144,8 @@ class TaskTile extends StatelessWidget {
                 )
               ],
             ),
-          )),
+          ),
+      ),
     );
   }
 }
