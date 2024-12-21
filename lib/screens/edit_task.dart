@@ -4,9 +4,6 @@ import 'package:my_todo/database/todo_database.dart';
 import 'package:my_todo/models/todo_model.dart';
 import 'package:provider/provider.dart';
 
-
-
-TextEditingController _dateController = TextEditingController();
 class EditTask extends StatefulWidget {
 
   TodoModel todo;
@@ -19,10 +16,43 @@ class EditTask extends StatefulWidget {
 class _EditTaskState extends State<EditTask> {
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
+  final TextEditingController _dateController = TextEditingController();
 
   bool editTaskState = true;
   late int _priority;
   late final TodoModel todo;
+
+
+  @override
+  void initState(){
+    super.initState();
+    ///making clone of todoModel instance
+    ///no matter in which instance we make changes
+    ///they both point ot same instance
+    ///after cloning assigning values to clone of todoModel instance
+    todo  = widget.todo;
+    assignValues();
+  }
+
+  void assignValues(){
+    _titleController.text = todo.title;
+    _priority= todo.priority ;
+    _descriptionController.text = todo.description;
+    _dateController.text = todo.dueDate;
+  }
+
+
+
+  ///date selector
+  Future<void> selectDate(context)async{
+    DateTime? date = await showDatePicker(context: context, firstDate: DateTime(2000), lastDate: DateTime(2100));
+    if(date  != null){
+      _dateController.text = date.toString().split(" ")[0];
+    }
+
+  }
+
+
 
   @override
   void dispose() {
@@ -34,18 +64,6 @@ class _EditTaskState extends State<EditTask> {
 
   @override
   Widget build(BuildContext context) {
-
-    if(editTaskState){
-      ///enable edit task state so that all controllers value is fixed
-      ///once assigned disbale edit task state
-      ///this will help to not to change to default value when state of the app is changed
-      todo = widget.todo;
-      _titleController.text = todo.title;
-      _priority= todo.priority ;
-      _descriptionController.text = todo.description;
-      _dateController.text = todo.dueDate;
-      editTaskState = false;
-    }
 
     return SafeArea(
       child: Scaffold(
@@ -65,7 +83,7 @@ class _EditTaskState extends State<EditTask> {
           ),
         ),
         body: Container(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.only(left: 20.0,right: 20.0,top: 30.0),
           child: Column(
             children: [
               ///title section
@@ -131,7 +149,7 @@ class _EditTaskState extends State<EditTask> {
                       onTap: ()=>selectDate(context),
                       controller: _dateController,
                       decoration: kInputFieldDecoration.copyWith(
-                          labelText: 'Date',
+                          labelText: 'Due Date',
                           prefixIcon: const Icon(Icons.date_range),
                           contentPadding: const EdgeInsets.all(0)
                       ),
@@ -152,10 +170,10 @@ class _EditTaskState extends State<EditTask> {
                       ///as instance is passed no need to call another function
                       ///directly change value of instance and call a notifier to alert ui changes
                       if(_descriptionController.text.isNotEmpty && _titleController.text.isNotEmpty && _dateController.text.isNotEmpty){
-                        widget.todo.title  = _titleController.text;
-                        widget.todo.description = _descriptionController.text;
-                        widget.todo.dueDate  = _dateController.text;
-                        widget.todo.priority = _priority;
+                        todo.title  = _titleController.text;
+                        todo.description = _descriptionController.text;
+                        todo.dueDate  = _dateController.text;
+                        todo.priority = _priority;
                         Provider.of<TodoData>(context,listen: false).notifyEditedTask();
                         Navigator.pop(context);
                         _titleController.clear();
@@ -171,9 +189,12 @@ class _EditTaskState extends State<EditTask> {
                         );
                       }
                     },
-                    style: kSubmitButtonStyle.copyWith(
-                        backgroundColor: const MaterialStatePropertyAll<Color>(
-                            Colors.green)),
+                    style: TextButton.styleFrom(
+                      backgroundColor: Colors.green,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0)
+                      )
+                    ),
                     child: const Text(
                       'Edit task',
                       style: kWhiteText,
@@ -186,8 +207,11 @@ class _EditTaskState extends State<EditTask> {
                       _descriptionController.clear();
                       _dateController.clear();
                     },
-                    style: kSubmitButtonStyle.copyWith(
-                      backgroundColor: const MaterialStatePropertyAll<Color>(Colors.red),
+                    style: TextButton.styleFrom(
+                        backgroundColor: Colors.red,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0)
+                        )
                     ),
                     child: const Text(
                       'Clear section',
@@ -204,11 +228,4 @@ class _EditTaskState extends State<EditTask> {
   }
 }
 
-///date selector
-Future<void> selectDate(context)async{
-  DateTime? date = await showDatePicker(context: context, firstDate: DateTime(2000), lastDate: DateTime(2100));
-  if(date  != null){
-    _dateController.text = date.toString().split(" ")[0];
-  }
 
-}

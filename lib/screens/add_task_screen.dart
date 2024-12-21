@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 ///add task screen will collect all the information and on submit button it will call
 ///add task function of todo_dataBase class
 
-TextEditingController _dateController = TextEditingController();
+
 class AddTaskScreen extends StatefulWidget {
   const AddTaskScreen({super.key});
 
@@ -18,6 +18,7 @@ class AddTaskScreen extends StatefulWidget {
 class _AddTaskScreenState extends State<AddTaskScreen> {
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
+  final TextEditingController _dateController = TextEditingController();
 
 
   int _priority = 2;
@@ -28,6 +29,15 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
     _descriptionController.dispose();
     _dateController.dispose();
     super.dispose();
+  }
+
+  ///date selector
+  Future<void> selectDate(context)async{
+    DateTime? date = await showDatePicker(context: context, firstDate: DateTime(2000), lastDate: DateTime(2100));
+    if(date  != null){
+      _dateController.text = date.toString().split(" ")[0];
+    }
+
   }
 
   @override
@@ -50,7 +60,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
           ),
         ),
         body: Container(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.only(left: 20.0,right: 20.0,top: 30.0),
           child: Column(
             children: [
 
@@ -117,7 +127,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                       onTap: ()=>selectDate(context),
                       controller: _dateController,
                       decoration: kInputFieldDecoration.copyWith(
-                        labelText: 'Date',
+                        labelText: 'Due Date',
                         prefixIcon: const Icon(Icons.date_range),
                         contentPadding: const EdgeInsets.all(0)
                       ),
@@ -159,9 +169,12 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                         );
                       }
                     },
-                    style: kSubmitButtonStyle.copyWith(
-                        backgroundColor: const MaterialStatePropertyAll<Color>(
-                            Colors.green)),
+                    style:TextButton.styleFrom(
+                        backgroundColor: Colors.green,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0)
+                        )
+                    ),
                     child: const Text(
                       'Add task',
                       style: kWhiteText,
@@ -175,8 +188,11 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                       _descriptionController.clear();
                       _dateController.clear();
                     },
-                    style: kSubmitButtonStyle.copyWith(
-                        backgroundColor: const MaterialStatePropertyAll<Color>(Colors.red),
+                    style: TextButton.styleFrom(
+                        backgroundColor: Colors.red,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0)
+                        )
                     ),
                     child: const Text(
                       'Clear section',
@@ -193,11 +209,4 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
   }
 }
 
-///date selector
-Future<void> selectDate(context)async{
-  DateTime? date = await showDatePicker(context: context, firstDate: DateTime(2000), lastDate: DateTime(2100));
-  if(date  != null){
-    _dateController.text = date.toString().split(" ")[0];
-  }
 
-}

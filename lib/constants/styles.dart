@@ -15,14 +15,16 @@ const kTaskCountStyle=TextStyle(
 final  kInputFieldDecoration = InputDecoration(
   border: OutlineInputBorder(
     borderRadius: BorderRadius.circular(10.0),
-  )
+  ),
+  // focusedBorder: OutlineInputBorder(
+  //   borderRadius: BorderRadius.circular(10.0),
+  //   borderSide: const BorderSide(width: 2,color: Colors.blue)
+  // ),
+  // floatingLabelStyle: TextStyle(color: Colors.blue,fontWeight: FontWeight.w600)
 );
 
-final kSubmitButtonStyle = ButtonStyle(
-  shape: MaterialStatePropertyAll(RoundedRectangleBorder(
-    borderRadius: BorderRadius.circular(10.0)
-  ))
-);
+
+
 
 const kWhiteText = TextStyle(
   color: Colors.white
